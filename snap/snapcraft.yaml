@@ -31,7 +31,6 @@ parts:
     plugin: cmake
     stage-packages:
         - libsasl2-2
-        - libssl1.1
         - libpq5
     build-packages:
         - g++
