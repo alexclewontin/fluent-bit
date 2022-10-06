@@ -1,5 +1,5 @@
 name: fluent-bit
-base: core18
+base: core22
 version: '2.0.0'
 summary: High performance logs and stream processor
 description: |
@@ -13,13 +13,13 @@ grade: 'stable'
 
 apps:
   service:
-    command: fluent-bit -c $SNAP/etc/fluent-bit/fluent-bit.conf
+    command: bin/fluent-bit -c $SNAP/etc/fluent-bit/fluent-bit.conf
     daemon: simple
     plugs:
       - network
       - network-bind
   fluent-bit:
-    command: fluent-bit
+    command: bin/fluent-bit -c $SNAP/etc/fluent-bit/fluent-bit.conf
     plugs:
       - network
       - network-bind
@@ -43,13 +43,20 @@ parts:
         - libssl-dev
         - libpq5
         - postgresql-server-dev-all
-    configflags:
-        - -DFLB_DEBUG=On
+        - libyaml-dev
+    cmake-parameters:
         - -DFLB_OUT_KAFKA=On
         - -DFLB_JEMALLOC=On
-        - -DFLB_EXAMPLES=OFF
+        - -DFLB_EXAMPLES=Off
         - -DFLB_SHARED_LIB=Off
         - -DFLB_OUT_PGSQL=On
+    organize:
+      usr/local/bin: bin
+      usr/local/etc: etc
+      # don't stage unnecessary files
+    stage:
+      - -lib/systemd
+      - -usr/local/include
 
 layout:
   /etc/fluent-bit:
