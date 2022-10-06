@@ -28,6 +28,11 @@ workflow/
 *.key
 *.log
 *.tar.gz
+# snap related dirs & files
+parts/
+stage/
+prime/
+*.snap
 
 # clangd files
 .cache/
