@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [ ! -d "$SNAP_COMMON/etc/fluent-bit" ] ; then
+    cp -r $SNAP/etc/fluent-bit $SNAP_COMMON/etc/fluent-bit
+fi

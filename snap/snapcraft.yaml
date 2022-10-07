@@ -13,13 +13,13 @@ grade: 'stable'
 
 apps:
   service:
-    command: bin/fluent-bit -c $SNAP/etc/fluent-bit/fluent-bit.conf
+    command: bin/fluent-bit -c $SNAP_COMMON/etc/fluent-bit/fluent-bit.conf
     daemon: simple
     plugs:
       - network
       - network-bind
   fluent-bit:
-    command: bin/fluent-bit -c $SNAP/etc/fluent-bit/fluent-bit.conf
+    command: bin/fluent-bit -c $SNAP_COMMON/etc/fluent-bit/fluent-bit.conf
     plugs:
       - network
       - network-bind
@@ -59,4 +59,4 @@ parts:
 
 layout:
   /etc/fluent-bit:
-    bind: $SNAP/etc/fluent-bit
+    bind: $SNAP_COMMON/etc/fluent-bit
